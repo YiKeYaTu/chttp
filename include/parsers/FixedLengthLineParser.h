@@ -10,7 +10,7 @@
 class FixedLengthLineParser: public LineParser {
 public:
     FixedLengthLineParser(unsigned long length):
-        length(length), LineParser() {}
+        length(length) {}
     FixedLengthLineParser(unsigned long length, const char* const lineSeparators):
             length(length), LineParser(lineSeparators) {}
 protected:

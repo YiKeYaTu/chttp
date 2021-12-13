@@ -7,11 +7,5 @@
 
 int main()
 {
-    LineParser lineParser;
-//    lineParser.parse('c');
-
-    FixedLengthLineParser fixedLengthLineParser;
-    fixedLengthLineParser.parse('c');
-//    lineParser.parse('c');
     return 0;
 }

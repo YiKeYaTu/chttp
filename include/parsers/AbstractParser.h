@@ -21,7 +21,6 @@ protected:
 
     virtual std::optional<T> parseChar(const char*) = 0;
     virtual void resetStatus() = 0;
-    std::map<std::string, AbstractParser*> subParserMap;
 
 private:
     bool completedParse = false;
@@ -68,8 +67,5 @@ inline void AbstractParser<T>::reset() {
     storedString.clear();
     completedParse = false;
     resetStatus();
-    for (const std::pair<std::string, AbstractParser*>& kv: subParserMap) {
-        kv.second->reset();
-    }
 }
 #endif //CHTTP_ABSTRACTPARSER_H

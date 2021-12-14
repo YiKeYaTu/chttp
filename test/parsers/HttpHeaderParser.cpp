@@ -8,6 +8,19 @@
 #include <iostream>
 #include "parsers/HttpHeaderParser.h"
 
+TEST(HttpHeaderParser, TestEmptyLine) {
+    std::string s = "\r\n";
+    HttpHeaderParser httpHeaderParser;
+    std::optional<std::pair<std::string, std::string>> header;
+
+    for (const char& c: s) {
+        header = httpHeaderParser.parse(&c);
+    }
+
+    EXPECT_EQ(header.has_value(), true);
+    EXPECT_EQ(header.value().first, "");
+    EXPECT_EQ(header.value().second, "");
+}
 TEST(HttpHeaderParser, TestOneHttpHeader) {
     std::string s = "Content-Type: text/plain\r\n";
     HttpHeaderParser httpHeaderParser;

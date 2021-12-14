@@ -5,12 +5,18 @@
 #include "parsers/HttpHeaderParser.h"
 #include "utils/stringUtils.h"
 #include <vector>
+#include <iostream>
 
 std::optional<HttpHeaderParser::httpHeader> HttpHeaderParser::parseChar(const char* c) {
     std::optional<std::string> optLine = lineParser.parse(c);
 
     if (optLine.has_value()) {
         std::string line = optLine.value();
+
+        // End of http headers.
+        if (line.length() == 0) {
+            return std::make_optional(std::pair<std::string, std::string> ("", ""));
+        }
 
         int colonPos = line.find(":", 0);
 

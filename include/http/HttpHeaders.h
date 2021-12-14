@@ -11,12 +11,12 @@ class HttpHeaders {
 private:
     std::map<std::string, std::string> headersMap;
 public:
-    void setHeader(std::pair<std::string, std::string>);
     void setHeader(std::string&, std::string&);
 
     HttpHeaders() = default;
-    HttpHeaders(std::map<std::string, std::string>);
-    HttpHeaders(HttpHeaders&);
+    HttpHeaders(std::map<std::string, std::string>&);
+
+    const std::string& getHeader(const std::string&) const;
 };
 
 

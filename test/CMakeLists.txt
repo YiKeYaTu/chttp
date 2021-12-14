@@ -15,7 +15,7 @@ FILE(GLOB_RECURSE Test_Files "*.cpp")
 add_executable(${PROJECT_NAME} ${Test_Files})
 
 target_link_libraries(${PROJECT_NAME}
-        parser
+        Lib_For_Test
         gtest_main)
 
 include(GoogleTest)

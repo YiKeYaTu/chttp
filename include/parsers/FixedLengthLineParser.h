@@ -11,7 +11,7 @@ class FixedLengthLineParser: public LineParser {
 public:
     FixedLengthLineParser(unsigned long length):
         length(length) {}
-    FixedLengthLineParser(unsigned long length, const char* const lineSeparators):
+    FixedLengthLineParser(unsigned long length, std::string& lineSeparators):
             length(length), LineParser(lineSeparators) {}
     virtual ~FixedLengthLineParser() = default;
 protected:

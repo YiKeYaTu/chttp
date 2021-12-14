@@ -11,11 +11,10 @@ FILE(GLOB Util_Files ${PROJECT_SOURCE_DIR}/src/utils/*.cpp)
 include_directories(src/)
 include_directories(include/)
 
-add_library(parser ${Parser_Files} ${Util_Files})
-add_library(http ${Http_Files})
+add_library(Lib_For_Test ${Parser_Files} ${Util_Files} ${Http_Files})
 
 add_executable(main main.cpp)
-target_link_libraries(main parser http)
+target_link_libraries(main Lib_For_Test)
 
 # Add sub directories
 add_subdirectory(test)

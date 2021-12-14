@@ -13,6 +13,7 @@ public:
         length(length) {}
     FixedLengthLineParser(unsigned long length, const char* const lineSeparators):
             length(length), LineParser(lineSeparators) {}
+    virtual ~FixedLengthLineParser() = default;
 protected:
     std::optional<std::string> parseChar(const char*) override;
 private:

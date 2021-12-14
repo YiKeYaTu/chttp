@@ -13,6 +13,7 @@
 template<class T>
 class AbstractParser {
 public:
+    virtual ~AbstractParser() = default;
     std::optional<T> parse(const char*);
     void reset();
     bool isCompleted() const;

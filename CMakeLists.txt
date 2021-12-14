@@ -12,17 +12,10 @@ include_directories(src/)
 include_directories(include/)
 
 add_library(parser ${Parser_Files} ${Util_Files})
-#target_include_directories(parser
-#        PUBLIC ${PROJECT_SOURCE_DIR}/include)
-
 add_library(http ${Http_Files})
-#target_include_directories(http
-#        PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-#add_executable(main src/main.cpp)
-#target_include_directories(main
-#        PUBLIC ${PROJECT_SOURCE_DIR}/include)
-#target_link_libraries(main parser http)
+add_executable(main main.cpp)
+target_link_libraries(main parser http)
 
 # Add sub directories
 add_subdirectory(test)

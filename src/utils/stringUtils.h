@@ -12,6 +12,23 @@ std::string& trimLeft(std::string&);
 std::string& trimRight(std::string&);
 std::string& trim(std::string&);
 
-std::vector<std::string> split(std::string&);
+class StringSplittingIterator: public std::iterator<std::input_iterator_tag, std::string> {
+public:
+    StringSplittingIterator(const std::string&, const std::string&);
+
+    bool hasNext() const;
+
+    StringSplittingIterator& operator++();
+    const StringSplittingIterator operator++(int);
+    const std::string operator*() const;
+private:
+    const std::string& input;
+    const std::string& separator;
+
+    std::string::size_type left = 0;
+    std::string::size_type right = 0;
+
+    std::string::size_type findNextSeparator() const;
+};
 
 #endif //CHTTP_STRINGUTILS_H

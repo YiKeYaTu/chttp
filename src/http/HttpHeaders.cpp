@@ -9,7 +9,11 @@ HttpHeaders::HttpHeaders(std::map<std::string, std::string>& headersMap) {
     this->headersMap = headersMap;
 }
 
-void HttpHeaders::setHeader(std::string& k, std::string& v) {
+void HttpHeaders::setHeader(std::string&& k, std::string&& v) {
+    headersMap.insert_or_assign(k, v);
+}
+
+void HttpHeaders::setHeader(const std::string& k, const std::string& v) {
     headersMap.insert_or_assign(k, v);
 }
 

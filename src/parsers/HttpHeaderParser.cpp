@@ -11,7 +11,7 @@ std::optional<HttpHeaderParser::httpHeader> HttpHeaderParser::parseChar(const ch
     std::optional<std::string> optLine = lineParser.parse(c);
 
     if (optLine.has_value()) {
-        std::string line = optLine.value();
+        std::string& line = optLine.value();
 
         // End of http headers.
         if (line.length() == 0) {
@@ -30,8 +30,8 @@ std::optional<HttpHeaderParser::httpHeader> HttpHeaderParser::parseChar(const ch
         trim(k);
         trim(v);
 
-        if (k.length() == 0 || v.length() == 0) {
-            throw std::invalid_argument("Invalid http header format: '" + line + "'");
+        if (k.length() == 0) {
+            throw std::invalid_argument("Invalid http header format: '" + line + "', which should at least has a header name");
         }
 
         return std::make_optional(std::pair<std::string, std::string> (k, v));

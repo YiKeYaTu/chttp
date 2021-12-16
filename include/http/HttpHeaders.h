@@ -11,7 +11,8 @@ class HttpHeaders {
 private:
     std::map<std::string, std::string> headersMap;
 public:
-    void setHeader(std::string&, std::string&);
+    void setHeader(std::string&&, std::string&&);
+    void setHeader(const std::string&, const std::string&);
 
     HttpHeaders() = default;
     HttpHeaders(std::map<std::string, std::string>&);

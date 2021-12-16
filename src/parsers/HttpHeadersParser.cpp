@@ -8,7 +8,7 @@ std::optional<HttpHeaders> HttpHeadersParser::parseChar(const char* c) {
     std::optional<std::pair<std::string, std::string>> optHttpHeader = httpHeaderParser.parse(c);
 
     if (optHttpHeader.has_value()) {
-        auto httpHeader = optHttpHeader.value();
+        auto& httpHeader = optHttpHeader.value();
         httpHeaderParser.reset();
 
         if (httpHeader.first.length() == 0) {

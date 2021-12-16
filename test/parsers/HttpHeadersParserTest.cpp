@@ -76,7 +76,6 @@ TEST(HttpHeadersParser, TestUnendingHeaders) {
     ASSERT_EQ(httpHeaders.has_value(), false);
 }
 
-
 TEST(HttpHeadersParser, TestContinuedHeaders) {
     std::string headers = "Accept: */*\r\nContent-Length: 12\r\nContent-Type: text/plain\r\n";
     HttpHeadersParser httpHeadersParser;

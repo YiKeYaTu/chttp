@@ -3,6 +3,8 @@
 //
 
 #include <algorithm>
+#include <iostream>
+#include <stdexcept>
 #include "stringUtils.h"
 
 std::string& trimLeft(std::string& s) {
@@ -22,6 +24,36 @@ std::string& trim(std::string& s) {
     return s;
 }
 
-std::vector<std::string> split(std::string&) {
+StringSplittingIterator::StringSplittingIterator(const std::string& input, const std::string& separator):
+input(input), separator(separator) {
+    right = findNextSeparator();
+}
 
+bool StringSplittingIterator::hasNext() const {
+    return right == std::string::npos ? false : true;
+}
+
+std::string::size_type StringSplittingIterator::findNextSeparator() const {
+    return input.find(separator, left);
+}
+
+const StringSplittingIterator StringSplittingIterator::operator++(int i) {
+    auto old = *this;
+    ++ (*this);
+    return old;
+}
+StringSplittingIterator &StringSplittingIterator::operator++() {
+    if (right == std::string::npos) {
+        throw std::out_of_range("");
+    }
+    left = right + 1;
+    right = findNextSeparator();
+    return *this;
+}
+
+const std::string StringSplittingIterator::operator*() const {
+    if (right == std::string::npos) {
+        return input.substr(left);
+    }
+    return input.substr(left, right - left);
 }

@@ -6,12 +6,12 @@
 #define CHTTP_HTTPHEADERSPARSER_H
 
 #include "parsers/AbstractParser.h"
-#include "parsers/HttpHeaderParser.h"
+#include "parsers/HttpHeaderParserTest.h"
 #include "http/HttpHeaders.h"
 
 class HttpHeadersParser : public AbstractParser<HttpHeaders> {
 private:
-    HttpHeaderParser httpHeaderParser;
+    HttpHeaderParserTest httpHeaderParser;
     HttpHeaders httpHeaders;
 protected:
     std::optional<HttpHeaders> parseChar(const char *) override;

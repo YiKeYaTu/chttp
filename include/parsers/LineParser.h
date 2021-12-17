@@ -12,7 +12,7 @@ class LineParser: public AbstractParser<std::string> {
 public:
     static const std::string CRLFSeparators;
     LineParser(): lineSeparators(CRLFSeparators) {}
-    LineParser(std::string& lineSeparators): lineSeparators(lineSeparators) {}
+    LineParser(const std::string& lineSeparators): lineSeparators(lineSeparators) {}
     ~LineParser() = default;
 protected:
     std::optional<std::string> parseChar(const char*) override;

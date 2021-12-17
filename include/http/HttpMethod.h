@@ -8,19 +8,16 @@
 #include <string>
 
 namespace HttpMethod {
-    enum class HttpMethodEnum {
-        OPTIONS,
-        GET,
-        HEAD,
-        POST,
-        PUT,
-        DELETE,
-        TRACE,
-        CONNECT
-    };
-    std::string convertEnum2String(const HttpMethodEnum&);
-    HttpMethodEnum convertString2Enum(std::string &&);
-    HttpMethodEnum convertString2Enum(const std::string &);
+    extern std::string OPTIONS;
+    extern std::string GET;
+    extern std::string HEAD;
+    extern std::string POST;
+    extern std::string PUT;
+    extern std::string DELETE;
+    extern std::string TRACE;
+    extern std::string CONNECT;
+
+    bool isOneOfValidHttpMethods(const std::string&);
 };
 
 #endif //CHTTP_HTTPMETHOD_H

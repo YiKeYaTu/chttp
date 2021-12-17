@@ -6,8 +6,11 @@
 
 std::optional<std::string> FixedLengthLineParser::parseChar(const char* c) {
     if (storedString.length() == length) {
-        int currentSeparatorIndex = lineSeparators.find(*c);
+        if (lineSeparators.length() == 0) {
+            return std::make_optional(storedString);
+        }
 
+        int currentSeparatorIndex = lineSeparators.find(*c);
         if (currentSeparatorIndex == statusOfSeparatorIndex) {
             statusOfSeparatorIndex ++;
         } else {

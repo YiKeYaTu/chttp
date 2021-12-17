@@ -12,28 +12,14 @@
 
 class HttpRequestLine  {
 public:
-    HttpRequestLine(std::string& httpMethod, std::string& uri, std::string& httpVersion): httpMethod(HttpMethod::convertString2Enum(httpMethod)), uri(URI::create(uri)), httpVersion(HttpVersion::convertString2Enum(httpVersion)) {}
-
-    inline HttpMethod::HttpMethodEnum getHttpMethod() const {
-        return httpMethod;
-    }
-
-    inline const URI& getUri() const {
-        return uri;
-    }
-
-    inline HttpVersion::HttpVersionEnum getHttpVersion() const {
-        return httpVersion;
-    }
-
-    inline std::string toString() {
-        return convertEnum2String(httpMethod) + " " + uri.getUriString() + " " + convertEnum2String(httpVersion);
-    }
-
+    HttpRequestLine(std::string&, std::string&, std::string&);
+    const std::string& getHttpMethod() const;
+    const URI& getUri() const;
+    const std::string& getHttpVersion() const;
 private:
-    HttpMethod::HttpMethodEnum httpMethod;
+    std::string httpMethod;
     URI uri;
-    HttpVersion::HttpVersionEnum httpVersion;
+    std::string httpVersion;
 };
 
 

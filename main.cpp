@@ -20,5 +20,7 @@ int main() {
     int c = func1();
     std::cout << p << std::endl;
     std::cout << c << std::endl;
+
+    LineParser lineParser;
     return 0;
 }

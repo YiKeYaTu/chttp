@@ -69,4 +69,5 @@ inline void AbstractParser<T>::reset() {
     completedParse = false;
     resetStatus();
 }
+
 #endif //CHTTP_ABSTRACTPARSER_H

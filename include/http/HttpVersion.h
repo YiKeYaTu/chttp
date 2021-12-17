@@ -8,14 +8,10 @@
 #include <string>
 
 namespace HttpVersion {
-    enum class HttpVersionEnum {
-        HTTP_1_1,
-        HTTP_2
-    };
+    extern std::string HTTP_1_1;
+    extern std::string HTTP_2;
 
-    std::string convertEnum2String(const HttpVersionEnum&);
-    HttpVersionEnum convertString2Enum(std::string &&);
-    HttpVersionEnum convertString2Enum(const std::string &);
+    bool isOneOfValidHttpVersions(const std::string&);
 };
 
 #endif //CHTTP_HTTPVERSION_H

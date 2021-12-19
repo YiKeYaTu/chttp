@@ -5,23 +5,23 @@
 #include "parsers/FixedLengthLineParser.h"
 
 std::optional<std::string> FixedLengthLineParser::parseChar(const char* c) {
-    if (storedString.length() == length) {
-        if (lineSeparators.length() == 0) {
-            return std::make_optional(storedString);
-        }
-
+    if (statusOfSeparatorIndex > 0 || storedString.length() == length) {
         int currentSeparatorIndex = lineSeparators.find(*c);
         if (currentSeparatorIndex == statusOfSeparatorIndex) {
             statusOfSeparatorIndex ++;
         } else {
             throw std::invalid_argument("invalid sequence: '" + storedString + "', with unexpected chars after reaching target length");
         }
-
-        if (statusOfSeparatorIndex == lineSeparators.length()) {
-            return std::make_optional(storedString);
-        }
     } else {
         storedString.append(1, *c);
+    }
+
+    if (storedString.length() != length) {
+        return std::nullopt;
+    }
+
+    if (lineSeparators.length() == 0 || statusOfSeparatorIndex == lineSeparators.length()) {
+        return std::make_optional(storedString);
     }
 
     return std::nullopt;

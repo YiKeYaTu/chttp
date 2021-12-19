@@ -17,6 +17,17 @@ void HttpHeaders::setHeader(const std::string& k, const std::string& v) {
     headersMap.insert_or_assign(k, v);
 }
 
+void HttpHeaders::setHeaders(const HttpHeaders& httpHeaders) {
+    auto& tempHttpHeaders = httpHeaders.getHeaders();
+    std::for_each(tempHttpHeaders.begin(), tempHttpHeaders.end(), [&](const std::pair<std::string, std::string>& p) {
+        headersMap.insert_or_assign(p.first, p.second);
+    });
+}
+
 const std::string& HttpHeaders::getHeader(const std::string& key) const {
     return headersMap.find(key)->second;
+}
+
+const bool HttpHeaders::hasHeader(const std::string& key) const {
+    return headersMap.contains(key);
 }

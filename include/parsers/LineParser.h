@@ -17,7 +17,7 @@ public:
 protected:
     std::optional<std::string> parseChar(const char*) override;
     void resetStatus() override;
-    const std::string& lineSeparators;
+    const std::string lineSeparators;
     unsigned int statusOfSeparatorIndex = 0;
 };
 

@@ -13,11 +13,14 @@ private:
 public:
     void setHeader(std::string&&, std::string&&);
     void setHeader(const std::string&, const std::string&);
+    void setHeaders(const HttpHeaders&);
 
     HttpHeaders() = default;
     HttpHeaders(std::map<std::string, std::string>&);
 
     const std::string& getHeader(const std::string&) const;
+    const std::map<std::string, std::string>& getHeaders() const { return headersMap; }
+    const bool hasHeader(const std::string &) const;
 };
 
 

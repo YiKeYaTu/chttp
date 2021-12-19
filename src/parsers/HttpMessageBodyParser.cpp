@@ -10,6 +10,11 @@ std::shared_ptr<HttpMessageBodyParser> HttpMessageBodyParser::getInstance(const 
     return std::make_shared<FixedLengthBodyParser>(FixedLengthBodyParser(contentLength));
 }
 
+FixedLengthBodyParser::FixedLengthBodyParser(const std::size_t &contentLength):
+fixedLengthLineParser(contentLength, "") {
+    
+}
+
 std::optional<HttpMessageBody> FixedLengthBodyParser::parseChar(const char* c) {
     std::optional<std::string> string = fixedLengthLineParser.parse(c);
 
@@ -17,7 +22,7 @@ std::optional<HttpMessageBody> FixedLengthBodyParser::parseChar(const char* c) {
         return std::nullopt;
     }
 
-    return HttpMessageBody();
+    return HttpMessageBody(string.value());
 }
 
 void FixedLengthBodyParser::resetStatus() {

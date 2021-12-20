@@ -9,6 +9,8 @@
 #include <stdexcept>
 #include <map>
 #include <string>
+#include <iostream>
+#include <mutex>
 
 template<class T>
 class AbstractParser {
@@ -24,6 +26,7 @@ protected:
     virtual void resetStatus() = 0;
 
 private:
+    std::mutex mutex;
     bool completedParse = false;
     void complete();
     void requiresNotComplete() const;
@@ -37,12 +40,13 @@ inline bool AbstractParser<T>::isCompleted() const {
 template<class T>
 inline std::optional<T> AbstractParser<T>::parse(const char* c) {
     requiresNotComplete();
+    std::lock_guard guard(mutex);
+
     try {
         std::optional<T> o = parseChar(c);
         if (o.has_value()) {
             complete();
         }
-
         return o;
     } catch (std::invalid_argument& e) {
         complete();

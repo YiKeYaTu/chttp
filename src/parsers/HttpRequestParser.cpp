@@ -27,7 +27,7 @@ std::optional<HttpRequest> HttpRequestParser::parseChar(const char* c) {
         if (httpMessageBodyParser->hasBody()) {
             return std::nullopt;
         } else {
-            return std::make_optional(HttpRequest());
+            return std::make_optional(HttpRequest(*httpRequestLine, *httpHeaders, HttpMessageBody()));
         }
     }
 
@@ -37,11 +37,17 @@ std::optional<HttpRequest> HttpRequestParser::parseChar(const char* c) {
             return std::nullopt;
         }
 
-        if (httpMessageBodyParser->hasExtraHttpHeaders()) {
-            httpHeaders->setHeaders(httpMessageBodyParser->getExtraHttpHeaders());
+        HttpMessageBody& httpMessageBody = optHttpMessageBody.value();
+
+        if (httpMessageBody.hasExtraHttpHeaders()) {
+            httpHeaders->setHeaders(httpMessageBody.getExtraHttpHeaders());
         }
 
-        return std::make_optional(HttpRequest());
+        return std::make_optional(HttpRequest(
+                *httpRequestLine,
+                *httpHeaders,
+                httpMessageBody
+        ));
     }
 }
 

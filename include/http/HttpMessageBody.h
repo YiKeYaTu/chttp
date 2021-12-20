@@ -14,7 +14,14 @@ class HttpMessageBody {
 public:
     HttpMessageBody(const std::string&);
     HttpMessageBody(const std::string&, const HttpHeaders& extraHttpHeaders);
+    HttpMessageBody() = default;
 
+    const bool hasExtraHttpHeaders() const {
+        return extraHttpHeaders.size() != 0;
+    }
+    const bool isEmpty() const {
+        return bodyBytes.size() == 0;
+    };
     const std::string getMessageBodyWithString() const;
     const HttpHeaders& getExtraHttpHeaders() const;
 private:

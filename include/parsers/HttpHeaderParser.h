@@ -9,10 +9,10 @@
 #include "http/HttpHeaders.h"
 #include "parsers/LineParser.h"
 
-class HttpHeaderParserTest: public AbstractParser<std::pair<std::string, std::string>> {
+class HttpHeaderParser: public AbstractParser<std::pair<std::string, std::string>> {
 public:
     typedef std::pair<std::string, std::string> httpHeader;
-    virtual ~HttpHeaderParserTest() = default;
+    virtual ~HttpHeaderParser() = default;
 protected:
     LineParser lineParser;
     std::optional<httpHeader> parseChar(const char*) override;

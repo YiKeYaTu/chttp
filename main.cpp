@@ -1,26 +1,16 @@
 //
 // Created by lc on 2021/12/12.
 //
+#include <thread>
+#include <mutex>
 
-#include "parsers/LineParser.h"
-#include "parsers/FixedLengthLineParser.h"
-#include <iostream>
-#include <memory>
+class A {
+    std::mutex m;
+};
 
-int& func1()
+int main()
 {
-    int i;
-    i = 1;
-    return i;
-}
+    A *p = new A;
 
-
-int main() {
-    int& p = func1();
-    int c = func1();
-    std::cout << p << std::endl;
-    std::cout << c << std::endl;
-
-    LineParser lineParser;
     return 0;
 }

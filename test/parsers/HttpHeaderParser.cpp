@@ -6,11 +6,11 @@
 #include <optional>
 #include <vector>
 #include <iostream>
-#include "parsers/HttpHeaderParserTest.h"
+#include "parsers/HttpHeaderParser.h"
 
 TEST(HttpHeaderParserTest, TestEmptyLine) {
     std::string s = "\r\n";
-    HttpHeaderParserTest httpHeaderParser;
+    HttpHeaderParser httpHeaderParser;
     std::optional<std::pair<std::string, std::string>> header;
 
     for (const char& c: s) {
@@ -23,7 +23,7 @@ TEST(HttpHeaderParserTest, TestEmptyLine) {
 }
 TEST(HttpHeaderParserTest, TestOneHttpHeader) {
     std::string s = "Content-Type: text/plain\r\n";
-    HttpHeaderParserTest httpHeaderParser;
+    HttpHeaderParser httpHeaderParser;
     std::optional<std::pair<std::string, std::string>> header;
 
     for (const char& c: s) {
@@ -45,7 +45,7 @@ TEST(HttpHeaderParserTest, TestMultipleHttpHeaders) {
             {std::pair<std::string, std::string>("Content-Type", "text/plain"),
                     std::pair<std::string, std::string>("Accept", "*/*")
                             });
-    HttpHeaderParserTest httpHeaderParser;
+    HttpHeaderParser httpHeaderParser;
     std::optional<std::pair<std::string, std::string>> header;
 
     int counter = 0;
@@ -71,7 +71,7 @@ TEST(HttpHeaderParserTest, TestMultipleHttpHeaders) {
 TEST(HttpHeaderParserTest, TestIncorrectHttpHeaders) {
 
     std::string s = "Content-Typetext/plain\r";
-    HttpHeaderParserTest httpHeaderParser;
+    HttpHeaderParser httpHeaderParser;
 
     for (const char& c: s) {
         httpHeaderParser.parse(&c);

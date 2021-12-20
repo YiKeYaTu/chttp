@@ -12,6 +12,7 @@ public:
     static URI create(const std::string&);
 
     const std::string &getUriString() const;
+    std::string &getUriString();
 
 private:
     URI(const std::string&);

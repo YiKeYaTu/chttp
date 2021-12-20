@@ -2,12 +2,12 @@
 // Created by lc on 2021/12/13.
 //
 
-#include "parsers/HttpHeaderParserTest.h"
+#include "parsers/HttpHeaderParser.h"
 #include "utils/stringUtils.h"
 #include <vector>
 #include <iostream>
 
-std::optional<HttpHeaderParserTest::httpHeader> HttpHeaderParserTest::parseChar(const char* c) {
+std::optional<HttpHeaderParser::httpHeader> HttpHeaderParser::parseChar(const char* c) {
     std::optional<std::string> optLine = lineParser.parse(c);
 
     if (optLine.has_value()) {
@@ -40,6 +40,6 @@ std::optional<HttpHeaderParserTest::httpHeader> HttpHeaderParserTest::parseChar(
     return std::nullopt;
 }
 
-void HttpHeaderParserTest::resetStatus() {
+void HttpHeaderParser::resetStatus() {
     lineParser.reset();
 }

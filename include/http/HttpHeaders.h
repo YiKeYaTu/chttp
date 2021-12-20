@@ -18,9 +18,11 @@ public:
     HttpHeaders() = default;
     HttpHeaders(std::map<std::string, std::string>&);
 
+    const std::size_t size() const { return headersMap.size(); }
+
     const std::string& getHeader(const std::string&) const;
     const std::map<std::string, std::string>& getHeaders() const { return headersMap; }
-    const bool hasHeader(const std::string &) const;
+    const bool hasHeader(const std::string&) const;
 };
 
 

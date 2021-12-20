@@ -8,16 +8,16 @@
 #include <string>
 
 namespace HttpMethod {
-    extern std::string OPTIONS;
-    extern std::string GET;
-    extern std::string HEAD;
-    extern std::string POST;
-    extern std::string PUT;
-    extern std::string DELETE;
-    extern std::string TRACE;
-    extern std::string CONNECT;
+    extern const std::string OPTIONS;
+    extern const std::string GET;
+    extern const std::string HEAD;
+    extern const std::string POST;
+    extern const std::string PUT;
+    extern const std::string DELETE;
+    extern const std::string TRACE;
+    extern const std::string CONNECT;
 
-    bool isOneOfValidHttpMethods(const std::string&);
+    const bool isOneOfValidHttpMethods(const std::string&);
 };
 
 #endif //CHTTP_HTTPMETHOD_H

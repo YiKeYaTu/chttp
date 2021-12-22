@@ -11,14 +11,14 @@ NonBlockSocket::NonBlockSocket(const ssize_t& fd, struct sockaddr_in& address)
     fcntl(fd, F_SETFL, O_NONBLOCK);
 }
 
-int NonBlockSocket::readFromSocket(std::shared_ptr<char[]> ptr, ssize_t size) {
+int NonBlockSocket::readFromSocket(std::shared_ptr<char[]> ptr, ssize_t size) const {
     return ::read(fd, ptr.get(), size);
 }
 
-int NonBlockSocket::writeToSocket(std::shared_ptr<char[]> ptr, ssize_t size) {
+int NonBlockSocket::writeToSocket(std::shared_ptr<char[]> ptr, ssize_t size) const {
     return ::write(fd, ptr.get(), size);
 }
 
-int NonBlockSocket::close() {
+int NonBlockSocket::closeSocket() const {
     return ::close(fd);
 }

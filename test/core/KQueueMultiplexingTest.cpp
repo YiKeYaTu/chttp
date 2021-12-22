@@ -17,12 +17,11 @@ TEST(KQueueMultiplexing, TestHttpServerSocket) {
     kQueueMultiplexing.onAccept([&kQueueMultiplexing](NonBlockServerSocket& nonBlockServerSocket) {
         kQueueMultiplexing.addNonBlockSocket(nonBlockServerSocket.accept());
     });
-    kQueueMultiplexing.onRead([](NonBlockSocket& nonBlockSocket) {
+    kQueueMultiplexing.onRead([&kQueueMultiplexing](NonBlockSocket& nonBlockSocket) {
         std::shared_ptr<char[]> buffer(new char[1024]);
         int n = nonBlockSocket.readFromSocket((buffer), 1024);
-
         if (n == 0) {
-            nonBlockSocket.close();
+            kQueueMultiplexing.closeNonBlockSocket(nonBlockSocket);
         } else {
             std::cout << buffer << std::endl;
         }

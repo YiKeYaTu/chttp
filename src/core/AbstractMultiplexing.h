@@ -16,6 +16,7 @@ public:
 
     virtual void addNonBlockServerSocket(const NonBlockServerSocket& nonBlockServerSocket) = 0;
     virtual void addNonBlockSocket(const NonBlockSocket& nonBlockSocket) = 0;
+    virtual void closeNonBlockSocket(const NonBlockSocket &nonBlockSocket) = 0;
 
     virtual void start() = 0;
 

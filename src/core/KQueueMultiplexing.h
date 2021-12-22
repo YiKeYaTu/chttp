@@ -5,17 +5,19 @@
 #ifndef CHTTP_KQUEUEMULTIPLEXING_H
 #define CHTTP_KQUEUEMULTIPLEXING_H
 
-#include "AbstractMultiplexing.h"
+#include <map>
 #include <sys/types.h>
 #include <sys/event.h>
 #include <sys/time.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
+#include "AbstractMultiplexing.h"
 
 class KQueueMultiplexing : public AbstractMultiplexing {
 public:
     void addNonBlockSocket(const NonBlockSocket &nonBlockSocket) override;
     void addNonBlockServerSocket(const NonBlockServerSocket &nonBlockServerSocket) override;
+    void closeNonBlockSocket(const NonBlockSocket &nonBlockSocket) override;
 
     [[noreturn]] void start() override;
 
@@ -25,7 +27,7 @@ private:
     struct kevent events[100];
 
     NonBlockServerSocket serverSocket;
-    std::vector<NonBlockSocket> clientSockets;
+    std::map<int, NonBlockSocket> nonBlockSocketsMap;
 
     void setEventByFD(int, void*);
 };

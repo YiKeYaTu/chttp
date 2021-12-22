@@ -17,15 +17,15 @@ class KQueueMultiplexing;
 class NonBlockSocket {
     friend class KQueueMultiplexing;
 public:
-    int readFromSocket(std::shared_ptr<char[]>, ssize_t);
-    int writeToSocket(std::shared_ptr<char[]>, ssize_t);
-    int close();
-
-    NonBlockSocket(const ssize_t&, struct sockaddr_in&);
+    int readFromSocket(std::shared_ptr<char[]>, ssize_t) const;
+    int writeToSocket(std::shared_ptr<char[]>, ssize_t) const;
+    NonBlockSocket(const ssize_t&, struct sockaddr_in&) ;
 
 protected:
     ssize_t fd;
     struct sockaddr_in address;
+private:
+    int closeSocket() const;
 };
 
 

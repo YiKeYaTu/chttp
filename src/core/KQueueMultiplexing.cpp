@@ -14,13 +14,19 @@ void KQueueMultiplexing::setEventByFD(int socketFD, void* extraDataPointer) {
 }
 
 void KQueueMultiplexing::addNonBlockSocket(const NonBlockSocket &nonBlockSocket) {
-    clientSockets.push_back(nonBlockSocket);
-    setEventByFD(nonBlockSocket.fd, &clientSockets[clientSockets.size() - 1]);
+    nonBlockSocketsMap.insert(std::pair(nonBlockSocket.fd, nonBlockSocket));
+    setEventByFD(nonBlockSocket.fd, &nonBlockSocketsMap.find(nonBlockSocket.fd)->second);
 }
 
 void KQueueMultiplexing::addNonBlockServerSocket(const NonBlockServerSocket &nonBlockServerSocket) {
     serverSocket = nonBlockServerSocket;
     setEventByFD(nonBlockServerSocket.fd, &serverSocket);
+}
+
+void KQueueMultiplexing::closeNonBlockSocket(const NonBlockSocket &nonBlockSocket) {
+    nonBlockSocketsMap.erase(nonBlockSocket.fd);
+    nonBlockSocket.closeSocket();
+    std::cout << nonBlockSocketsMap.size() << std::endl;
 }
 
 [[noreturn]] void KQueueMultiplexing::start() {
@@ -35,7 +41,8 @@ void KQueueMultiplexing::addNonBlockServerSocket(const NonBlockServerSocket &non
                     }
                 } else {
                     if (handleRead != nullptr) {
-                        handleRead(*static_cast<NonBlockSocket*>(events[i].udata));
+                        NonBlockSocket* clientSocket = static_cast<NonBlockSocket*>(events[i].udata);
+                        handleRead(*clientSocket);
                     }
                 }
             }

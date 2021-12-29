@@ -3,9 +3,11 @@
 //
 
 #include <gtest/gtest.h>
+#include <stack>
+#include <sys/select.h>
 #include "core/KQueueMultiplexing.h"
 #include "core/NonBlockServerSocket.h"
-#include <stack>
+
 
 TEST(KQueueMultiplexing, TestHttpServerSocket) {
     NonBlockServerSocket nonBlockServerSocket;

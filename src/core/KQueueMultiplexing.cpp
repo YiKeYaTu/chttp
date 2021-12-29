@@ -2,7 +2,7 @@
 // Created by lc on 2021/12/21.
 //
 
-#include "KQueueMultiplexing.h"
+#include "core/KQueueMultiplexing.h"
 
 KQueueMultiplexing::KQueueMultiplexing()
 : fd(kqueue()) {}
@@ -26,7 +26,6 @@ void KQueueMultiplexing::addNonBlockServerSocket(const NonBlockServerSocket &non
 void KQueueMultiplexing::closeNonBlockSocket(const NonBlockSocket &nonBlockSocket) {
     nonBlockSocketsMap.erase(nonBlockSocket.fd);
     nonBlockSocket.closeSocket();
-    std::cout << nonBlockSocketsMap.size() << std::endl;
 }
 
 [[noreturn]] void KQueueMultiplexing::start() {
